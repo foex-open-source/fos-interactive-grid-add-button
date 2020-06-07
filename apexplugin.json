@@ -1,0 +1,40 @@
+{
+    "name":"FOS - Interactive Grid - Add Button"
+   ,"version":"20.1.0"
+   ,"description":"\u003Cp\u003EAdds a button to an Interactive Grid\u0027s toolbar or popup menus.\u003C\/p\u003E"
+   ,"license":"MIT"
+   ,"homepage":"https:\/\/foex.at\/fos"
+   ,"author":{
+        "name":"FOEX GmbH"
+       ,"email":"office@fos.world"
+       ,"url":"https:\/\/fos.world\/"
+       ,"twitter":"@foexopensource"
+    }
+   ,"repository":{
+        "type":"git"
+       ,"url":"https:\/\/github.com\/foex-open-source\/.git"
+    }
+   ,"oracle":{
+        "versions":[
+            "11.2.0.4"
+           ,"12.1.0.1"
+           ,"12.2.0.1"
+           ,"18.0.0.0"
+           ,"19.0.0.0"
+        ]
+       ,"apex":{
+            "versions":[
+                "19.2.0"
+               ,"20.1.0"
+            ]
+           ,"plugin":{
+                "internalName":"COM.FOS.INTERACTIVE_GRID_ADD_BUTTON"
+               ,"type":"dynamic action"
+               ,"demo":"https:\/\/fos.world\/ords\/f?p=1000:"
+               ,"previewImage":"https:\/\/fos.world\/ords\/fos_master_ws\/fos-image\/COM.FOS.INTERACTIVE_GRID_ADD_BUTTON"
+            }
+        }
+    }
+}
+
+
