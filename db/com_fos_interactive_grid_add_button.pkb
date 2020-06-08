@@ -1,5 +1,6 @@
-CREATE OR REPLACE PACKAGE BODY COM_FOS_INTERACTIVE_GRID_ADD_BUTTON
-IS
+create or replace package body com_fos_interactive_grid_add_button
+as
+
 function render
     ( p_dynamic_action apex_plugin.t_dynamic_action
     , p_plugin         apex_plugin.t_plugin
@@ -83,7 +84,8 @@ begin
 
     return l_result;
 end;
-END COM_FOS_INTERACTIVE_GRID_ADD_BUTTON;
+
+end;
 /
 
 
