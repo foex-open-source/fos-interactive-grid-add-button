@@ -1,14 +1,21 @@
+
+
 {
     "name":"FOS - Interactive Grid - Add Button"
    ,"version":"20.1.0"
-   ,"description":"\u003Cp\u003EAdds a button to an Interactive Grid\u0027s toolbar or popup menus.\u003C\/p\u003E"
+   ,"description":"Add buttons to the Interactive Grid\u0027s toolbar and popup menus.\r\n\u003Ch4\u003EFree Plug-in under MIT License\u003C\/h4\u003E\r\n\u003Cp\u003E\r\nAll FOS plug-ins are released under MIT License, which essentially means it is free for everyone to use, no matter if commercial or private use. \r\n\u003C\/p\u003E\r\n\u003Ch4\u003EOverview\u003C\/h4\u003E\r\n\u003Cp\u003E\n    The \u003Cstrong\u003EFOS - Interactive Grid - Add Button\u003C\/strong\u003E plug-in is a simple way for adding buttons to the Interactive Grid. Whether it\u0027s the toolbar, the actions menu, the row actions menu or the row selection menu, this plug-in allows you to extend all of these components with your own, highly customizable buttons, declaratively.\n\u003C\/p\u003E\n\u003Cp\u003E\n    The plug-ins settings give you fine control over the buttons position (first, last, index), look, icon, and which action should be executed when that button is clicked. You can execute a predefined action (ie. delete row), execute some JavaScript code, trigger an event, put the currently selected row(s) pk value into a page item, or even provide your own actions.\n\u003C\/p\u003E\n"
    ,"keywords":[
         "interactive grid"
        ,"button"
        ,"menu"
     ]
    ,"license":"MIT"
-   ,"homepage":"https:\/\/foex.at\/fos"
+   ,"commercial":"Yes"
+   ,"homepage":"https:\/\/foex.at\/fos\/"
+   ,"bugs":{
+        "url":"https:\/\/github.com\/foex-open-source\/fos-interactive-grid-add-button\/issues"
+       ,"email":"support@fos.world"
+    }
    ,"author":{
         "name":"FOEX GmbH"
        ,"email":"office@fos.world"
@@ -21,8 +28,7 @@
     }
    ,"oracle":{
         "versions":[
-            "11.2.0.4"
-           ,"12.1.0.1"
+            "12.1.0.1"
            ,"12.2.0.1"
            ,"18.0.0.0"
            ,"19.0.0.0"
@@ -35,11 +41,13 @@
            ,"plugin":{
                 "internalName":"COM.FOS.INTERACTIVE_GRID_ADD_BUTTON"
                ,"type":"dynamic action"
-               ,"demo":"https:\/\/fos.world\/ords\/f?p=1000:2010"
+               ,"demo":"https:\/\/fos.world\/ords\/f?p=10000:2010"
                ,"previewImage":"https:\/\/fos.world\/ords\/fos_master_ws\/fos-image\/COM.FOS.INTERACTIVE_GRID_ADD_BUTTON"
             }
         }
     }
 }
+
+
 
 
