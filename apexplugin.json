@@ -10,7 +10,8 @@
        ,"menu"
     ]
    ,"license":"MIT"
-   ,"commercial":"Yes"
+   ,"commercial":"No"
+   ,"commercially_supported":"Yes"
    ,"homepage":"https:\/\/foex.at\/fos\/"
    ,"bugs":{
         "url":"https:\/\/github.com\/foex-open-source\/fos-interactive-grid-add-button\/issues"
