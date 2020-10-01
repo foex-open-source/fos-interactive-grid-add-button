@@ -17,7 +17,6 @@ All FOS plug-ins are released under MIT License, which essentially means it is f
     The plug-ins settings give you fine control over the buttons position (first, last, index), look, icon, and which action should be executed when that button is clicked. You can execute a predefined action (ie. delete row), execute some JavaScript code, trigger an event, put the currently selected row(s) pk value into a page item, or even provide your own actions.
 </p>
 
-
 ## License
 
 MIT
