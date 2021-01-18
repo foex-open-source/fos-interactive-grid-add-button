@@ -1,5 +1,3 @@
-
-
 /* globals apex,$ */
 
 var FOS = window.FOS || {};
@@ -23,7 +21,9 @@ FOS.interactiveGrid = FOS.interactiveGrid || {};
  * @param {boolean}  [config.iconOnly]              Only for toolbar buttons. Even if no icon was provided, you should still set this attribute to yes, just in case an icon was defined in the action
  * @param {boolean}  [config.iconRightAligned]      Only for toolbar buttons. True if the button's icon should be right-aligned.
  * @param {boolean}  [config.disableOnNoSelection]  Disable the button if no rows are selected in the grid
- * @param {boolean}  [config.disableOnData]         Disable the button if the grid contains no data
+ * @param {boolean}  [config.disableOnNoData]       Disable the button if the grid contains no data
+ * @param {boolean}  [config.hideOnNoSelection]     Hide the button if no rows are selected in the grid
+ * @param {boolean}  [config.hideOnNoData]          Hide the button if the grid contains no data
  * @param {string}   [config.conditionColumn]       Only for Row Actions Menu buttons. Provide a column that determines if the button for a specific row is hidden or disabled. Values of that column should be null, "hidden" or "disabled"
  * @oaram {string}   [config.actionName]            Optional. If the button is associated with an already existing action, provide that action name. The label, icon, title, disabled state, are inherited from that action unless overridden.
  *                                                  Provide a custom string, such as "my-fancy-action", if you wish to later control the button. E.g update the label.
@@ -70,11 +70,13 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
     var callback = config.callback;
     var disableOnNoSelection = config.disableOnNoSelection;
     var disableOnNoData = config.disableOnNoData;
+    var hideOnNoSelection = config.hideOnNoSelection;
+    var hideOnNoData = config.hideOnNoData;
     var iconOnly = config.iconOnly;
     var iconRightAligned = config.iconRightAligned;
 
     // if no action name was provided, we must create a new, unique one
-    var actionName = config.actionName || 'fos-ig-button-' + setTimeout(function(){});
+    var actionName = config.actionName || 'fos-ig-button-' + setTimeout(function () { });
 
     // create an action object, but without an action function for now
     var action = {
@@ -285,6 +287,21 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
             icon: icon ? ('fa ' + icon) : ''
         });
         toolbar$.toolbar('option', 'data', toolbarData);
+
+        // https://github.com/foex-open-source/fos-interactive-grid-add-button/issues/5
+        // Updating the toolbar is not as simple as resetting the data or refreshing it.
+        // Certain controls which could be hidden in Page Designer like Search Field or Actions Menu
+        //      will not remember their hidden state after refresh.
+        // The following will produce and extra flash, but all controls will remember their state.
+        // It is in essence how the IG handles it as well.
+
+        // first hide all controls which do not have an associated action
+        toolbar$.toolbar('findElement', 'column_filter_button').hide();
+        toolbar$.toolbar('findElement', 'search_field').hide();
+        toolbar$.toolbar('findElement', 'actions_button').hide();
+
+        // then conditionally re-show them
+        region.call('instance')._updateToolbarElements();
     }
 
     // in the case of a conditional Row Actions button, hide or disable before each menu open
@@ -310,47 +327,83 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
         });
     }
 
-  	var conditionallyEnable;
-
-    // if Disable On No Selection is turned on
-    if (disableOnNoSelection) {
+    // Disable/Hide On No Selection
+    if (disableOnNoSelection || hideOnNoSelection) {
         // disabling/enabling the button happens through the action interface
-        conditionallyEnable = function() {
-            if (region.call('getSelectedRecords').length) {
-                actionsContext.enable(actionName);
-            } else {
-                actionsContext.disable(actionName);
+        var onSelectionChange = function () {
+            var action = actionsContext.lookup(actionName);
+            var recordCount = region.call('getSelectedRecords').length;
+            if (disableOnNoSelection) {
+                if (recordCount > 0 && action.disabled) {
+                    actionsContext.enable(actionName);
+                } else if (recordCount == 0 && !action.disabled) {
+                    actionsContext.disable(actionName);
+                }
+            }
+            if (hideOnNoSelection) {
+                if (recordCount > 0 && action.hide) {
+                    actionsContext.show(actionName);
+                } else if (recordCount == 0 && !action.hide) {
+                    actionsContext.hide(actionName);
+                }
             }
         };
         // run once on page load
-        conditionallyEnable();
-        // subsequently run whenever the whenever the selection changes
-        $(regionSelector).on('interactivegridselectionchange', conditionallyEnable);
+        onSelectionChange();
+        // subsequently run whenever the selection changes
+        // selectionchange does not fire on reportchange,
+        // so we include both
+        $(regionSelector).on('interactivegridselectionchange interactivegridreportchange', onSelectionChange);
     }
 
-    // if Disable On No Data is turned on
-    if (disableOnNoData) {
-        model = region.call('getViews', 'grid').model;
+    // Disable/Hide On No Data
+    if (disableOnNoData || hideOnNoData) {
         // disabling/enabling the button happens through the action interface
-        conditionallyEnable = function() {
-            if (model._data.length) {
-                actionsContext.enable(actionName);
-            } else {
-                actionsContext.disable(actionName);
+        var onDataChange = function () {
+            var model = region.call('getViews', 'grid').model;
+            var action = actionsContext.lookup(actionName);
+            var recordCount = model._data.length;
+            if (disableOnNoData) {
+                if (recordCount > 0 && action.disabled) {
+                    actionsContext.enable(actionName);
+                } else if (recordCount == 0 && !action.disabled) {
+                    actionsContext.disable(actionName);
+                }
+            }
+            if (hideOnNoData) {
+                if (recordCount > 0 && action.hide) {
+                    actionsContext.show(actionName);
+                } else if (recordCount == 0 && !action.hide) {
+                    actionsContext.hide(actionName);
+                }
             }
         };
-        // run once on page load
-        conditionallyEnable();
-        // subsequently run whenever the whenever the grid data changes
-        model.subscribe({
-            onChange: function(changeType, change){
-                conditionallyEnable();
+
+        // run whenever the grid data changes
+        var model, viewId;
+
+        function onModelChange(){
+            if(model && viewId){
+                // only keep the most recent observer
+                model.unSubscribe(viewId);
             }
+            model = region.call('getViews', 'grid').model;
+            viewId = model.subscribe({
+                onChange: onDataChange
+            });
+            onDataChange();
+        };
+
+        // the model onChange event is not fired on report change
+        // so we include an extra handler
+        $(regionSelector).on('interactivegridreportchange', function(){
+            onModelChange();
         });
+
+        // run once on page load
+        onModelChange();
     }
 
 };
-
-
 
 

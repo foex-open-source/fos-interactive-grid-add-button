@@ -1,8 +1,6 @@
-
-
 ## FOS - Interactive Grid - Add Button
 
-![](https://img.shields.io/badge/Plug--in_Type-Dynamic_Action-orange.svg) ![](https://img.shields.io/badge/APEX-19.2-success.svg) ![](https://img.shields.io/badge/APEX-20.1-success.svg)
+![](https://img.shields.io/badge/Plug--in_Type-Dynamic_Action-orange.svg) ![](https://img.shields.io/badge/APEX-19.2-success.svg) ![](https://img.shields.io/badge/APEX-20.1-success.svg) ![](https://img.shields.io/badge/APEX-20.2-success.svg)
 
 Add buttons to the Interactive Grid's toolbar and popup menus.
 <h4>Free Plug-in under MIT License</h4>
@@ -20,6 +18,4 @@ All FOS plug-ins are released under MIT License, which essentially means it is f
 ## License
 
 MIT
-
-
 

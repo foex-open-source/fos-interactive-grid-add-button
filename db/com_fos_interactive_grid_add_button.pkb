@@ -1,5 +1,3 @@
-
-
 create or replace package body com_fos_interactive_grid_add_button
 as
 
@@ -49,6 +47,9 @@ as
 
     l_disable_on_no_selection boolean                            := 'disable-if-no-rows' member of l_extras;
     l_disable_on_no_data      boolean                            := 'disable-if-no-data' member of l_extras;
+    l_hide_on_no_selection    boolean                            := 'hide-if-no-rows'    member of l_extras;
+    l_hide_on_no_data         boolean                            := 'hide-if-no-data'    member of l_extras;
+
     l_icon_only               boolean                            := 'icon-only'          member of l_extras;
     l_is_hot                  boolean                            := 'is-hot'             member of l_extras;
     l_right_aligned_icon      boolean                            := 'right-aligned-icon' member of l_extras;
@@ -78,6 +79,8 @@ begin
     --    "eventName": "lemon-clicked",
     --    "disableOnNoSelection": true
     --    "disableOnNoData": true
+    --    "hideOnNoSelection": true
+    --    "hideOnNoData": true
     --    "iconOnly": false
     -- });
 
@@ -105,6 +108,8 @@ begin
     apex_json.write('isHot'               , l_is_hot);
     apex_json.write('disableOnNoSelection', l_disable_on_no_selection);
     apex_json.write('disableOnNoData'     , l_disable_on_no_data);
+    apex_json.write('hideOnNoSelection'   , l_hide_on_no_selection);
+    apex_json.write('hideOnNoData'        , l_hide_on_no_data);
     apex_json.write('iconOnly'            , l_icon_only);
     apex_json.write('iconRightAligned'    , l_right_aligned_icon);
 
@@ -135,7 +140,5 @@ end render;
 
 end;
 /
-
-
 
 

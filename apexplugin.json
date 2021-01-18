@@ -1,8 +1,6 @@
-
-
 {
     "name":"FOS - Interactive Grid - Add Button"
-   ,"version":"20.1.1"
+   ,"version":"20.2.0"
    ,"description":"Add buttons to the Interactive Grid\u0027s toolbar and popup menus.\r\n\u003Ch4\u003EFree Plug-in under MIT License\u003C\/h4\u003E\r\n\u003Cp\u003E\r\nAll FOS plug-ins are released under MIT License, which essentially means it is free for everyone to use, no matter if commercial or private use. \r\n\u003C\/p\u003E\r\n\u003Ch4\u003EOverview\u003C\/h4\u003E\r\n\u003Cp\u003E\r\n    The \u003Cstrong\u003EFOS - Interactive Grid - Add Button\u003C\/strong\u003E plug-in is a simple way for adding buttons to the Interactive Grid. Whether it\u0027s the toolbar, the actions menu, the row actions menu or the row selection menu, this plug-in allows you to extend all of these components with your own, highly customizable buttons, declaratively.\r\n\u003C\/p\u003E\r\n\u003Cp\u003E\r\n    The plug-ins settings give you fine control over the buttons position (first, last, index), look, icon, and which action should be executed when that button is clicked. You can execute a predefined action (ie. delete row), execute some JavaScript code, trigger an event, put the currently selected row(s) pk value into a page item, or even provide your own actions.\r\n\u003C\/p\u003E"
    ,"keywords":[
         "interactive grid"
@@ -38,6 +36,7 @@
             "versions":[
                 "19.2.0"
                ,"20.1.0"
+               ,"20.2.0"
             ]
            ,"plugin":{
                 "internalName":"COM.FOS.INTERACTIVE_GRID_ADD_BUTTON"
@@ -48,7 +47,5 @@
         }
     }
 }
-
-
 
 

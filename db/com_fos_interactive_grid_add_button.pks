@@ -1,5 +1,3 @@
-
-
 create or replace package com_fos_interactive_grid_add_button
 as
 
@@ -11,7 +9,5 @@ as
 
 end;
 /
-
-
 
 
