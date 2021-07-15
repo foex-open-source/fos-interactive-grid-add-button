@@ -74,6 +74,7 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
     var hideOnNoData = config.hideOnNoData;
     var iconOnly = config.iconOnly;
     var iconRightAligned = config.iconRightAligned;
+    var iconPrefix = config.iconPrefix;
 
     // if no action name was provided, we must create a new, unique one
     var actionName = config.actionName || 'fos-ig-button-' + setTimeout(function () { });
@@ -84,7 +85,7 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
         name: actionName,
         label: label,
         icon: icon,
-        iconType: 'fa'
+        iconType: iconPrefix
     };
 
     // Step 1. Create the onClick event

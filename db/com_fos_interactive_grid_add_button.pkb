@@ -20,6 +20,7 @@ function render
 return apex_plugin.t_dynamic_action_render_result
 as
     l_result                  apex_plugin.t_dynamic_action_render_result;
+    l_app_id                  apex_applications.application_id%type := nv('APP_ID');
 
     l_add_button_to           p_dynamic_action.attribute_01%type := p_dynamic_action.attribute_01;
     l_alignment               p_dynamic_action.attribute_02%type := p_dynamic_action.attribute_02;
@@ -54,6 +55,24 @@ as
     l_is_hot                  boolean                            := 'is-hot'             member of l_extras;
     l_right_aligned_icon      boolean                            := 'right-aligned-icon' member of l_extras;
     l_init_js_fn              varchar2(32767)                    := nvl(apex_plugin_util.replace_substitutions(p_dynamic_action.init_javascript_code), 'undefined');
+
+    function get_font_icon_prefix
+    return varchar2
+    is
+        l_icon_prefix varchar2(255);
+    begin
+
+        select /*+ result_cache */ nvl(custom_icon_prefix_class, 'fa') prefix
+          into l_icon_prefix
+          from apex_application_themes
+         where application_id = l_app_id
+           and theme_number   = apex_application.g_flow_theme_id;
+
+        return l_icon_prefix;
+    exception
+        when no_data_found then
+            return 'fa';
+    end get_font_icon_prefix;
 
 begin
     -- standard debugging intro, but only if necessary
@@ -112,6 +131,7 @@ begin
     apex_json.write('hideOnNoData'        , l_hide_on_no_data);
     apex_json.write('iconOnly'            , l_icon_only);
     apex_json.write('iconRightAligned'    , l_right_aligned_icon);
+    apex_json.write('iconPrefix'          , get_font_icon_prefix);
 
     apex_json.write('conditionColumn'     , l_condition_column);
 

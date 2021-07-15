@@ -12,7 +12,7 @@ All FOS plug-ins are released under MIT License, which essentially means it is f
     The <strong>FOS - Interactive Grid - Add Button</strong> plug-in is a simple way for adding buttons to the Interactive Grid. Whether it's the toolbar, the actions menu, the row actions menu or the row selection menu, this plug-in allows you to extend all of these components with your own, highly customizable buttons, declaratively.
 </p>
 <p>
-    The plug-ins settings give you fine control over the buttons position (first, last, index), look, icon, and which action should be executed when that button is clicked. You can execute a predefined action (ie. delete row), execute some JavaScript code, trigger an event, put the currently selected row(s) pk value into a page item, or even provide your own actions.
+    The plug-in's settings give you fine control over the buttons position (first, last, index), look, icon, and which action should be executed when that button is clicked. You can execute a predefined action (ie. delete row), execute some JavaScript code, trigger an event, put the currently selected row(s) pk value into a page item, or even provide your own actions.
 </p>
 
 ## License
