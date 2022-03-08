@@ -188,7 +188,8 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
                     focusElement: focusElement,
                     region: region,
                     model: model,
-                    actionsContext: actionsContext
+                    actionsContext: actionsContext,
+                    selectedRecords: region.call('getSelectedRecords')
                 });
             };
 
@@ -201,7 +202,8 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
                         focusElement: focusElement,
                         region: region,
                         model: model,
-                        actionsContext: actionsContext
+                        actionsContext: actionsContext,
+                        selectedRecords: region.call('getSelectedRecords')
                     }
                 });
             };
