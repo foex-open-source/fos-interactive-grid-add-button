@@ -314,7 +314,7 @@ FOS.interactiveGrid.addButton = function (daContext, config, initFn) {
             model = grid.model;
 
             // this is how we get the record associated to the currently opened row actions menu
-            var record = grid.getContextRecord(grid.view$.find('.js-menuButton.is-active'))[0];
+            var record = grid.getContextRecord(grid.view$.find('button[data-menu].is-active'))[0];
             var conditionValue = model.getValue(record, conditionColumn.toUpperCase());
             conditionValue = (conditionValue && conditionValue.toLowerCase) ? conditionValue.toLowerCase() : conditionValue;
             // always show and enable before menu open
